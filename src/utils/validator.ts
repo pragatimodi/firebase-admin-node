@@ -186,6 +186,13 @@ export function isPhoneNumber(phoneNumber: any): boolean {
   return re1.test(phoneNumber) && re2.test(phoneNumber);
 }
 
+export function isTotpObject(totpInfo: any): boolean {
+  if (!isObject(totpInfo)) {
+    return false;
+  }
+  return isString(totpInfo.sharedSecretKey);
+}
+
 /**
  * Validates that a string is a valid ISO date string.
  *
@@ -195,7 +202,7 @@ export function isPhoneNumber(phoneNumber: any): boolean {
 export function isISODateString(dateString: any): boolean {
   try {
     return isNonEmptyString(dateString) &&
-        (new Date(dateString).toISOString() === dateString);
+      (new Date(dateString).toISOString() === dateString);
   } catch (e) {
     return false;
   }
@@ -211,7 +218,7 @@ export function isISODateString(dateString: any): boolean {
 export function isUTCDateString(dateString: any): boolean {
   try {
     return isNonEmptyString(dateString) &&
-        (new Date(dateString).toUTCString() === dateString);
+      (new Date(dateString).toUTCString() === dateString);
   } catch (e) {
     return false;
   }
@@ -252,8 +259,8 @@ export function isURL(urlStr: any): boolean {
     const pathnameRe = /^(\/[\w\-.~!$'()*+,;=:@%]+)*\/?$/;
     // Validate pathname.
     if (pathname &&
-        pathname !== '/' &&
-        !pathnameRe.test(pathname)) {
+      pathname !== '/' &&
+      !pathnameRe.test(pathname)) {
       return false;
     }
     // Allow any query string and hash as long as no invalid character is used.
